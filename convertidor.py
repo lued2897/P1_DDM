@@ -55,7 +55,7 @@ def convertirDecimalABase(numero, base):
         parte_decimal -= int(parte_decimal)
         contador += 1
         
-    print(numero_base)
+    return numero_base
     
 def encontrarNumeroDigitos(numero, base):
     valor = 0
@@ -73,4 +73,6 @@ def encontrarNumeroDigitos(numero, base):
 base = int(input("Hola indica la base jajaja: "))
 numero = float(input("Hola indica el numero jajaja: "))
 
-convertirDecimalABase(numero, base)
+print(convertirDecimalABase(numero, base))
+
+
