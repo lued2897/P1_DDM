@@ -1,12 +1,23 @@
 from decimal import *
-from numpy import float128 as float128
+from numpy import float64 as float128
+import streamlit as st
 
 def main():
-    print("Convertidor de bases numéricas")
-    input("Presiona Enter para continuar...")
-    base1 = int(input("Ingresa la base de origen: "))
-    base2 = int(input("Ingresa la base de destino: "))
-    numero = string(input("Ingresa el número a convertir: "))
+    st.title("Convertidor de bases numéricas")
+    num = st.text_input("Ingresa el número a convertir:")
+    from_base = st.number_input("Ingresa la base de origen::", min_value=2, max_value=36, value=10)
+    to_base = st.number_input("Ingresa la base de destino:", min_value=2, max_value=36, value=2)
+
+    if st.button("Convertir"):
+        try:
+            resultado = convertirBaseADecimal(num,from_base)
+            resultado = convertirDecimalABase(resultado,to_base)
+
+            print(resultado)
+            st.success(f"Resultado: {resultado}")
+        except ValueError:
+            st.error("Entrada no válida")
+
 
 def convertirAlfabeticoADecimal(caracter, base):
     valor_ascii = ord(caracter) - 55
@@ -32,6 +43,7 @@ def convertirBaseADecimal(numero, base):
     for digito in numero:
         if digito.isalpha():
             digito = convertirAlfabeticoADecimal(digito, base)
+            print(digito)
         elif digito == '.':
             continue
         else:
@@ -48,7 +60,7 @@ def convertirDecimalABase(numero, base):
     parte_entera = int(numero)
     parte_decimal = numero - parte_entera
     if(parte_decimal > 0):
-        print("Se indicara con 11 digitos de precision en el punto")
+        print("Se indicara con 16 digitos de precision en el punto")
     
     
     #Trabaja con la parte entera
@@ -63,7 +75,7 @@ def convertirDecimalABase(numero, base):
     #Trabaja con la parte decimal
     numero_base += "."
     contador = 0
-    while parte_decimal > 0 and contador < 11:
+    while parte_decimal > 0 and contador < 16:
         parte_decimal *= base
         parte_entera = int(parte_decimal)
         if parte_entera > 9:
@@ -78,4 +90,7 @@ def convertir(numero, base1, base2):
     numero_decimal = convertirBaseADecimal(numero, base1)
     numero_base = convertirDecimalABase(numero_decimal, base2)
     return numero_base
+
+if __name__ == '__main__':
+    main()
 
