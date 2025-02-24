@@ -5,8 +5,15 @@ import streamlit as st
 def main():
     st.title("Convertidor de bases numéricas")
     num = st.text_input("Ingresa el número a convertir:")
-    from_base = st.number_input("Ingresa la base de origen::", min_value=2, max_value=36, value=10)
-    to_base = st.number_input("Ingresa la base de destino:", min_value=2, max_value=36, value=2)
+    from_base = st.number_input("Ingresa la base de origen::", min_value=2, max_value=34, value=10)
+    to_base = st.number_input("Ingresa la base de destino:", min_value=2, max_value=34, value=2)
+
+    st.sidebar.markdown('# Tarea 1 DDM')
+    st.sidebar.markdown('## Autores:')
+    st.sidebar.markdown('- Ortega Guerrero Moises')
+    st.sidebar.markdown('- Ospino Merida Emilio Sebastian')
+    st.sidebar.markdown('- Perez Nava Francisco Javier	')
+    st.sidebar.markdown('- Perez Osorio Luis Eduardo')
 
     if st.button("Convertir"):
         try:
